@@ -7,8 +7,8 @@
     "configGroup": "Plugins",
     "configCode": "Shipping",
     "configKey": "ShippingStandard",
-    "version": "1.0.2",
-    "requireCore": ["1.1"],
+    "version": "2.0",
+    "requireCore": ["2.0"],
     "requirePackages": ["gp247/shop"],
     "requireExtensions": []
 }
