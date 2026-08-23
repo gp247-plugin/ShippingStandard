@@ -53,4 +53,21 @@ class AdminLivewire extends ConfigForm
             'shipping_free' => 'number',
         ];
     }
+
+    /**
+     * Both settings are money amounts stored in the shop's base currency, so show
+     * the base currency-code hint beside each label (e.g. "(VND)"). Guarded so the
+     * screen still renders on installs where the shop currency helper is absent.
+     *
+     * @return array<string, string>
+     */
+    protected function fieldHints(): array
+    {
+        $hint = function_exists('gp247_money_hint') ? gp247_money_hint() : '';
+
+        return [
+            'fee' => $hint,
+            'shipping_free' => $hint,
+        ];
+    }
 }
