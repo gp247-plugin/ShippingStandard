@@ -213,14 +213,20 @@ class AppConfig extends ExtensionConfigDefault
             $subTotal = $dataCheckout['subTotal'] ?? 0;
         }
 
-        $fee = (float) (AdminConfig::where('group', $this->configKey)
+        // Fee and free-shipping threshold are stored in BASE currency (admin enters
+        // them in base). Convert both to the DISPLAY currency here so getInfo() honours
+        // the plugin money contract: `value` is returned in the display currency and
+        // core no longer converts it (ADR storefront_total-method-currency-contract).
+        // Compare against $subTotal (already display currency from sumCartCheckout) in
+        // the same currency, then return the fee in display currency.
+        $fee = gp247_currency_value((float) (AdminConfig::where('group', $this->configKey)
             ->where('key', 'fee')
             ->where('store_id', GP247_STORE_ID_GLOBAL)
-            ->value('value') ?? config($this->appPath.'.fee') ?? 0);
-        $shippingFree = (float) (AdminConfig::where('group', $this->configKey)
+            ->value('value') ?? config($this->appPath.'.fee') ?? 0));
+        $shippingFree = gp247_currency_value((float) (AdminConfig::where('group', $this->configKey)
             ->where('key', 'shipping_free')
             ->where('store_id', GP247_STORE_ID_GLOBAL)
-            ->value('value') ?? config($this->appPath.'.shipping_free') ?? 0);
+            ->value('value') ?? config($this->appPath.'.shipping_free') ?? 0));
 
         if ($subTotal >= $shippingFree) {
             $fee = 0;
