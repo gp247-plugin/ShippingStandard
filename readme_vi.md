@@ -8,6 +8,7 @@ Plugin vận chuyển tiêu chuẩn cho GP247/Shop. Tính phí vận chuyển d�
 - Tính phí vận chuyển theo tổng tiền hàng.
 - Miễn phí vận chuyển nếu tổng tiền đạt ngưỡng `shipping_free`.
 - Cấu hình linh hoạt qua tệp `config.php` của plugin.
+- **Cấu hình theo từng cửa hàng trên site nhiều cửa hàng / sàn**: mỗi cửa hàng tự bật plugin và có `fee` / ngưỡng miễn phí riêng, kế thừa cấu hình chung cho tới khi ghi đè (`storeScope: store`). Site một cửa hàng không bị ảnh hưởng.
 - Cung cấp route front để kiểm tra hiển thị plugin và route admin để quản trị: `plugin/shippingstandard/index`, `GP247_ADMIN_PREFIX/shippingstandard`.
 
 ## Hướng dẫn cài đặt

@@ -201,6 +201,42 @@ class AppConfig extends ExtensionConfigDefault
     }
 
     /**
+     * Resolve a money setting for the effective store, in the shop's base currency.
+     *
+     * Reads the row for the effective store (gp247_plugin_store_id), falling back to
+     * the GLOBAL row and finally the plugin's file default — the same two-tier
+     * store→GLOBAL inheritance gp247_config uses, but kept group-qualified so the
+     * generic keys ("fee"/"shipping_free") never collide with another plugin's.
+     *
+     * @param string $key Setting key ("fee" | "shipping_free").
+     * @return float The amount in base currency.
+     *
+     * @aidlc-unit plugin-manager
+     * @aidlc-story US-shipping-standard-per-store-config
+     * @aidlc-adr plugin-manager_per-store-plugin-config
+     */
+    private function resolveSetting(string $key): float
+    {
+        $storeId = function_exists('gp247_plugin_store_id')
+            ? gp247_plugin_store_id()
+            : GP247_STORE_ID_GLOBAL;
+
+        $value = AdminConfig::where('group', $this->configKey)
+            ->where('key', $key)
+            ->where('store_id', $storeId)
+            ->value('value');
+
+        if ($value === null && (string) $storeId !== (string) GP247_STORE_ID_GLOBAL) {
+            $value = AdminConfig::where('group', $this->configKey)
+                ->where('key', $key)
+                ->where('store_id', GP247_STORE_ID_GLOBAL)
+                ->value('value');
+        }
+
+        return (float) ($value ?? config($this->appPath.'.'.$key) ?? 0);
+    }
+
+    /**
      * Get info plugin
      *
      * @return  [type]  [return description]
@@ -219,14 +255,13 @@ class AppConfig extends ExtensionConfigDefault
         // core no longer converts it (ADR storefront_total-method-currency-contract).
         // Compare against $subTotal (already display currency from sumCartCheckout) in
         // the same currency, then return the fee in display currency.
-        $fee = gp247_currency_value((float) (AdminConfig::where('group', $this->configKey)
-            ->where('key', 'fee')
-            ->where('store_id', GP247_STORE_ID_GLOBAL)
-            ->value('value') ?? config($this->appPath.'.fee') ?? 0));
-        $shippingFree = gp247_currency_value((float) (AdminConfig::where('group', $this->configKey)
-            ->where('key', 'shipping_free')
-            ->where('store_id', GP247_STORE_ID_GLOBAL)
-            ->value('value') ?? config($this->appPath.'.shipping_free') ?? 0));
+        //
+        // Per-store aware (storeScope=store, ADR plugin-manager_per-store-plugin-config):
+        // resolve each setting for the EFFECTIVE store (gp247_plugin_store_id — the
+        // vendor's store on a marketplace checkout, the domain's store in multi-store),
+        // falling back to the GLOBAL row then the file default.
+        $fee = gp247_currency_value($this->resolveSetting('fee'));
+        $shippingFree = gp247_currency_value($this->resolveSetting('shipping_free'));
 
         if ($subTotal >= $shippingFree) {
             $fee = 0;

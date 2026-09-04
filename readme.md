@@ -10,6 +10,7 @@ Standard shipping plugin for GP247/Shop. It calculates shipping fees based on th
 - Calculate shipping fee from cart subtotal.
 - Automatic free shipping when subtotal >= `shipping_free`.
 - Easy configuration via the plugin `config.php`.
+- **Per-store settings on a multi-store / marketplace site**: each store enables the plugin on its own and keeps its own fee / free-shipping threshold, inheriting the shared config until it overrides them (`storeScope: store`). Single-store sites are unaffected.
 - Exposes front/admin routes for quick checks: `plugin/shippingstandard/index`, `GP247_ADMIN_PREFIX/shippingstandard`.
 
 ## Installation

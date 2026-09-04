@@ -36,6 +36,33 @@ class AdminLivewire extends ConfigForm
         return 'ShippingStandard';
     }
 
+    /**
+     * Opt into per-store scope: on a multi-store/marketplace site the screen shows the
+     * store picker so each store keeps its own fee / free-ship threshold and on/off
+     * state, inheriting the shared config until overridden. Single-store: no-op.
+     *
+     * @return bool
+     *
+     * @aidlc-unit plugin-manager
+     * @aidlc-story US-shipping-standard-per-store-config
+     * @aidlc-adr plugin-manager_per-store-plugin-config
+     */
+    protected function storeScoped(): bool
+    {
+        return true;
+    }
+
+    /**
+     * The plugin's on/off flag key (admin_config group "Plugins"), so a sub-store scope
+     * gets the "enable this plugin for this store" toggle.
+     *
+     * @return string|null
+     */
+    protected function enableKey(): ?string
+    {
+        return 'ShippingStandard';
+    }
+
     protected function heading(): string
     {
         return trans('Plugins/ShippingStandard::lang.title');

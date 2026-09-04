@@ -7,9 +7,10 @@
     "configGroup": "Plugins",
     "configCode": "Shipping",
     "configKey": "ShippingStandard",
-    "version": "2.2",
+    "version": "2.3",
     "requireCore": ["3.0"],
     "requireUpdateFrom": "2.0",
     "requireComposerPackages": ["gp247/shop"],
-    "requireGp247Extensions": []
+    "requireGp247Extensions": [],
+    "storeScope": "store"
 }
