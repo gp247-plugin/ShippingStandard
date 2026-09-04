@@ -3,8 +3,8 @@
 ## Overview
 Standard shipping plugin for GP247/Shop. It calculates shipping fees based on the cart subtotal and automatically applies free shipping when the configured threshold is met.
 
-- Requirements: GP247/Shop (Core >= 1.1), package `gp247/shop` installed and active.
-- Version: 1.0.2
+- Requirements: GP247/Shop (Core >= 3.0), package `gp247/shop` installed and active.
+- Version: 2.3
 
 ## Features
 - Calculate shipping fee from cart subtotal.

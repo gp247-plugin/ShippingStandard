@@ -1,8 +1,8 @@
 ## Tổng quan
 Plugin vận chuyển tiêu chuẩn cho GP247/Shop. Tính phí vận chuyển dựa trên tổng giá trị đơn hàng và tự động miễn phí khi đạt ngưỡng cấu hình.
 
-- Yêu cầu: GP247/Shop (Core >= 1.1), gói `gp247/shop` đã cài đặt và hoạt động.
-- Phiên bản: 1.0.2
+- Yêu cầu: GP247/Shop (Core >= 3.0), gói `gp247/shop` đã cài đặt và hoạt động.
+- Phiên bản: 2.3
 
 ## Giới thiệu chức năng
 - Tính phí vận chuyển theo tổng tiền hàng.
