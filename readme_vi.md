@@ -27,6 +27,28 @@ Có thể cài đặt theo một trong các cách sau:
 - Sao chép vào thư mục `app/GP247/Plugins/ShippingStandard`.
 - Đăng nhập Admin, vào khu vực Extensions để kiểm tra và kích hoạt.
 
+4) Cài bằng dòng lệnh (CLI, gp247 3.x)
+
+Từ gp247 3.x, bạn có thể tải **ShippingStandard** từ thư viện GP247 và cài ngay bằng dòng lệnh mà không cần mở admin. Mở Terminal tại thư mục gốc website rồi chạy:
+
+```bash
+# 1) Chỉ làm 1 lần cho mỗi website: đăng ký API License (miễn phí) để kết nối thư viện GP247
+php artisan gp247:ext-register-license
+
+# 2) Tải plugin từ thư viện và cài
+php artisan gp247:ext-install --type=plugin --key=ShippingStandard
+```
+
+- Trước bước 1, kiểm tra `APP_URL` trong `.env` là **domain thật** của website (không để `http://localhost`), vì license được gắn với domain này.
+- Cài xong, plugin được **bật sẵn** và cache tự làm mới, bạn không cần thao tác gì thêm trong admin.
+- Lệnh tự kiểm tra điều kiện khai báo trong `gp247.json` (phiên bản core, gói composer, plugin phụ thuộc). Nếu thiếu, lệnh dừng lại và báo rõ thiếu gì.
+- Plugin này cần gói `gp247/shop` đã được cài; nếu thiếu, lệnh sẽ dừng lại và báo.
+- Nếu thư mục `app/GP247/Plugins/ShippingStandard` đã có sẵn trên máy (chép thủ công hoặc có sẵn theo bộ cài), lệnh sẽ **cài tại chỗ**, không tải lại.
+- Nếu plugin đã được cài, lệnh sẽ từ chối. Để lên bản mới, chạy `php artisan gp247:ext-update --type=plugin --key=ShippingStandard`.
+- Thêm `--json` vào cuối lệnh để nhận kết quả dạng máy đọc được (dùng cho script/CI).
+- Các bước ở mục **Cách sử dụng** bên dưới vẫn giữ nguyên: bước 1 (kích hoạt) đã được lệnh làm sẵn, còn bước 2 (cấu hình `fee` / `shipping_free`) và bước 3 (kiểm tra tích hợp) bạn vẫn cần làm.
+- Chi tiết: [Hướng dẫn cài đặt Plugin & Template](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension_vi.md) · [Tra cứu lệnh](https://github.com/gp247net/gp247-docs/blob/main/system/command-line-reference_vi.md).
+
 ## Cách sử dụng
 1) Kích hoạt plugin
 - Vào Admin > Extensions > Shipping và bật plugin "ShippingStandard".
