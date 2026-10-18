@@ -28,4 +28,13 @@
      if (file_exists(__DIR__.'/function.php')) {
          require_once __DIR__.'/function.php';
      }
+
+     // Standard shipping layer of gp247/shop: a rates-only provider (US-shipping-standard-provider-contract).
+     // WHY guarded: on an older shop the plugin keeps serving the old getInfo() contract.
+     if (interface_exists(\GP247\Shop\Shipping\Contracts\ShippingProvider::class)) {
+         config(['gp247-config.shop.shipping_providers.ShippingStandard' => [
+             'driver' => \App\GP247\Plugins\ShippingStandard\Services\StandardShippingProvider::class,
+             'capabilities' => ['rates'],
+         ]]);
+     }
  }

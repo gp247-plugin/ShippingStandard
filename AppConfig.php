@@ -217,7 +217,23 @@ class AppConfig extends ExtensionConfigDefault
      */
     private function resolveSetting(string $key): float
     {
-        $storeId = function_exists('gp247_plugin_store_id')
+        return $this->baseSetting($key);
+    }
+
+    /**
+     * A money setting ("fee" | "shipping_free") of a given store, in base currency —
+     * shared by getInfo() (old contract) and StandardShippingProvider (shipping layer).
+     *
+     * @param string          $key     Setting key.
+     * @param string|int|null $storeId Store (null = effective store, gp247_plugin_store_id()).
+     * @return float
+     *
+     * @aidlc-unit plugin-shipping-standard
+     * @aidlc-story US-shipping-standard-provider-contract
+     */
+    public function baseSetting(string $key, $storeId = null): float
+    {
+        $storeId ??= function_exists('gp247_plugin_store_id')
             ? gp247_plugin_store_id()
             : GP247_STORE_ID_GLOBAL;
 
