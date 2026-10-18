@@ -5,10 +5,15 @@ namespace App\GP247\Plugins\ShippingStandard\Livewire;
 
 use GP247\Core\AdminShell\Infrastructure\ConfigForm;
 use GP247\Core\Models\AdminConfig;
+use GP247\Shop\Shipping\ShippingSettings;
 
 /**
  * Admin settings screen for the Standard shipping plugin (fee, free-shipping
- * threshold), backed by the admin_config key/value table.
+ * threshold), backed by the admin_config key/value table. Above the form, "Check
+ * before use" lists what still stops the fee from showing at checkout (readiness()).
+ *
+ * @aidlc-unit plugin-shipping-standard
+ * @aidlc-story US-shipping-standard-config-readiness
  */
 class AdminLivewire extends ConfigForm
 {
@@ -96,5 +101,28 @@ class AdminLivewire extends ConfigForm
             'fee' => $hint,
             'shipping_free' => $hint,
         ];
+    }
+
+    /**
+     * What a flat fee needs from the shop: shipping on at checkout and this plugin on for
+     * the store. Customer address fields and the pick-up warehouse do not change a flat
+     * fee, so the shop's other shipping conditions are left out.
+     *
+     * @return array<int, \GP247\Core\AdminShell\Infrastructure\ReadinessCheck>
+     *
+     * @aidlc-story US-shipping-standard-config-readiness
+     * @aidlc-story US-admin-shell-config-form-readiness
+     */
+    protected function readiness(): array
+    {
+        // WHY the guard: this free plugin also runs on a gp247/shop older than the shipping readiness source.
+        if (!method_exists(ShippingSettings::class, 'readiness')) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            ShippingSettings::readiness($this->readinessStoreId(), 'ShippingStandard'),
+            static fn ($check): bool => in_array($check->key, ['shipping_enabled', 'provider_enabled'], true)
+        ));
     }
 }
