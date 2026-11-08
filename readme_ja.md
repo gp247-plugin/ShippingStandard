@@ -50,7 +50,7 @@ php artisan gp247:ext-install --type=plugin --key=ShippingStandard
 - プラグインがすでにインストール済みの場合、コマンドは実行を拒否します。新しいバージョンに更新するには `php artisan gp247:ext-update --type=plugin --key=ShippingStandard` を実行します。
 - コマンドの末尾に `--json` を付けると、機械可読な形式で結果を受け取れます（スクリプト／CI 用）。
 - 下記の**使い方**の手順はそのまま有効です：手順 1（有効化）はコマンドで完了済みですが、手順 2（`fee`／`shipping_free` の設定）と手順 3（連携の確認）は引き続き行う必要があります。
-- 詳細：[プラグイン＆テンプレートのインストールガイド](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension.md) · [コマンドリファレンス](https://github.com/gp247net/gp247-docs/blob/main/system/command-line-reference.md)。
+- 詳細：[プラグイン＆テンプレートのインストールガイド](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension.md) · [コマンドリファレンス](https://github.com/gp247net/gp247-docs/blob/main/cli/cli-extensions_ja.md)。
 
 ## 使い方
 1) プラグインの有効化

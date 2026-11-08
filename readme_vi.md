@@ -50,7 +50,7 @@ php artisan gp247:ext-install --type=plugin --key=ShippingStandard
 - Nếu plugin đã được cài, lệnh sẽ từ chối. Để lên bản mới, chạy `php artisan gp247:ext-update --type=plugin --key=ShippingStandard`.
 - Thêm `--json` vào cuối lệnh để nhận kết quả dạng máy đọc được (dùng cho script/CI).
 - Các bước ở mục **Cách sử dụng** bên dưới vẫn giữ nguyên: bước 1 (kích hoạt) đã được lệnh làm sẵn, còn bước 2 (cấu hình `fee` / `shipping_free`) và bước 3 (kiểm tra tích hợp) bạn vẫn cần làm.
-- Chi tiết: [Hướng dẫn cài đặt Plugin & Template](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension_vi.md) · [Tra cứu lệnh](https://github.com/gp247net/gp247-docs/blob/main/system/command-line-reference_vi.md).
+- Chi tiết: [Hướng dẫn cài đặt Plugin & Template](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension_vi.md) · [Tra cứu lệnh](https://github.com/gp247net/gp247-docs/blob/main/cli/cli-extensions_vi.md).
 
 ## Cách sử dụng
 1) Kích hoạt plugin
