@@ -82,6 +82,6 @@ return [
 - Installation guide: `https://gp247.net/en/docs/user-guide-extension/guide-to-installing-the-extension.html`
 
 ## License
-Developed by GP247
+Developed by GP247. Free and open source under the [MIT License](./LICENSE).
 
 
