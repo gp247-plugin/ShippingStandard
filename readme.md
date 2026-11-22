@@ -3,9 +3,9 @@
 # ShippingStandard Plugin
 
 ## Overview
-Standard shipping plugin for GP247/Shop. It calculates shipping fees based on the cart subtotal and automatically applies free shipping when the configured threshold is met.
+Standard shipping plugin for S-Cart. It calculates shipping fees based on the cart subtotal and automatically applies free shipping when the configured threshold is met.
 
-- Requirements: GP247/Shop (Core 3.0 or 3.1), package `gp247/shop` installed and active.
+- Requirements: S-Cart (Core 3.0 or 3.1), package `gp247/shop` installed and active.
 - Version: 2.4.2
 
 ## Features
