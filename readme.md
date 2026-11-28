@@ -52,7 +52,7 @@ php artisan gp247:ext-install --type=plugin --key=ShippingStandard
 - The command refuses a plugin that is already installed. To move to a newer version, run `php artisan gp247:ext-update --type=plugin --key=ShippingStandard`.
 - Append `--json` to get machine-readable output (for scripts/CI).
 - The steps in the **Usage** section below still apply: step 1 (enable) is already done by the command, while step 2 (configure `fee` / `shipping_free`) and step 3 (verify integration) are still up to you.
-- More: [Installing Plugins & Templates](https://github.com/gp247net/gp247-docs/blob/main/extension/install-extension.md) · [Command reference](https://github.com/gp247net/gp247-docs/blob/main/cli/cli-extensions.md).
+- More: [Installing Plugins & Templates](https://github.com/gp247-official/gp247-docs/blob/main/extension/install-extension.md) · [Command reference](https://github.com/gp247-official/gp247-docs/blob/main/cli/cli-extensions.md).
 
 ## Usage
 1) Enable the plugin
@@ -78,7 +78,7 @@ return [
 - Optionally visit `plugin/shippingstandard/index` to verify the front route is reachable.
 
 ## Documentation
-- GitHub: `https://github.com/gp247net/ShippingStandard`
+- GitHub: `https://github.com/gp247-official/ShippingStandard`
 - Installation guide: `https://gp247.net/en/docs/user-guide-extension/guide-to-installing-the-extension.html`
 
 ## License
